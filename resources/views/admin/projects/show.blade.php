@@ -7,7 +7,7 @@
         </div>
         <div>
         <p>{{!! $project->body !!}}></p>
-        @if ($project->category)
+                @if ($project->category)
             <div class="mb-3">
                 <h4>Category</h4>
                 <a href="{{route('admin.categories.show', $project->category->slug)}}">{{$project->category->name : 'Uncategorized'}}</a>

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <section class="container">
-        <h1>Tecnology Create</h1>
-        <form action="{{ route('admin.tecnologies.store')}}"  method="POST">
+        <h1>Technology Create</h1>
+        <form action="{{ route('admin.technologies.store')}}"  method="POST">
         @csrf
         <div class="mb-3">
             <label for="name">Name</label>

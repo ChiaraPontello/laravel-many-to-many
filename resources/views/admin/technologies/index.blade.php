@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <section class="container">
-        <h1>Tecnology List</h1>
+        <h1>Technology List</h1>
        <div class="text-end">
-        <a class="btn btn-success" href="{{route('admin.tecnologies.create')}}">Crea nuova tecnologia</a>
+        <a class="btn btn-success" href="{{route('admin.technologies.create')}}">Crea nuova tecnologia</a>
     </div>
 
     @if(session()->has('message'))
@@ -22,18 +22,18 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($tecnologies as $tecnology)
+        @foreach($technologies as $technology)
                 <tr>
-                    <th scope="row">{{$tecnology->id}}</th>
-                    <td><a href="{{route('admin.tecnologies.show', $tecnology->slug)}}" title="View Tecnology">{{$tecnology->name}}</a></td>
-                    <td>{{Str::limit($tecnology->body,100)}}</td>
+                    <th scope="row">{{$technology->id}}</th>
+                    <td><a href="{{route('admin.technologies.show', $technology->slug)}}" title="View Tecnology">{{$technology->name}}</a></td>
+                    <td>{{Str::limit($technology->body,100)}}</td>
 
-                    <td><a class="link-secondary" href="{{route('admin.tecnologies.edit', $tecnology->slug)}}" title="Edit Tecnology"><i class="fa-solid fa-pen"></i></a></td>
+                    <td><a class="link-secondary" href="{{route('admin.technologies.edit', $technology->slug)}}" title="Edit Technology"><i class="fa-solid fa-pen"></i></a></td>
                     <td>
-                        <form action="{{route('admin.tecnologies.destroy', $tecnology->slug)}}" method="POST">
+                        <form action="{{route('admin.technologies.destroy', $technology->slug)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$tecnology->name}}"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="submit" class="delete-button btn btn-danger ms-3" data-item-title="{{$technology->name}}"><i class="fa-solid fa-trash-can"></i></button>
                      </form>
                     </td>
                 </tr>
