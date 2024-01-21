@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
-
+Use Illuminate\Support\Str;
 class TechnologyController extends Controller
 {
     /**
@@ -31,7 +31,13 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        //
+        $formData = $request->validated();
+        //CREATE SLUG
+        $slug = Str::of($formData['name'])->slug('-');
+        //add slug to formData
+        $formData['slug'] = $slug;
+        $technology = Technology::create($formData);
+        return redirect()->route('admin.technologies.show', $technology->slug);
     }
 
     /**
@@ -55,7 +61,17 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        //
+        $formData = $request->validated();
+        $formData['slug'] = $technology->slug;
+
+        if ($technology->name !== $formData['name']) {
+            //CREATE SLUG
+            $slug = Str::of($formData['name'])->slug('-');
+            $formData['slug'] = $slug;
+        }
+        $technology->update($formData);
+        return redirect()->route('admin.technologies.show', $technology->slug);
+
     }
 
     /**
@@ -63,6 +79,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+        return to_route('admin.technologies.index')->with('message', "$technology->name eliminato con successo");
+
     }
 }
