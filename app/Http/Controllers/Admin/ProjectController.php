@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Category;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
@@ -27,7 +28,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.projects.create', compact('categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('categories', 'technologies'));
     }
 
     /**
