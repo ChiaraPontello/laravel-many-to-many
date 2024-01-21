@@ -25,7 +25,7 @@
         @foreach($technologies as $technology)
                 <tr>
                     <th scope="row">{{$technology->id}}</th>
-                    <td><a href="{{route('admin.technologies.show', $technology->slug)}}" title="View Tecnology">{{$technology->name}}</a></td>
+                    <td><a href="{{route('admin.technologies.show', $technology->slug)}}" title="View Technology">{{$technology->name}}</a></td>
                     <td>{{Str::limit($technology->body,100)}}</td>
 
                     <td><a class="link-secondary" href="{{route('admin.technologies.edit', $technology->slug)}}" title="Edit Technology"><i class="fa-solid fa-pen"></i></a></td>
