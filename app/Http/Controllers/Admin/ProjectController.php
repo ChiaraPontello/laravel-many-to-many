@@ -53,7 +53,11 @@ class ProjectController extends Controller
         }
 
         $project = Project::create($formData);
-        return redirect()->route('admin.projects.show', $project->id);
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
+        }
+
+        return redirect()->route('admin.projects.show', $project->slug);
     }
 
     /**
@@ -70,7 +74,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('admin.projects.edit', compact('project', 'categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'categories', 'technologies'));
     }
 
     /**
